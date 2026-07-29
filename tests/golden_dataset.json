@@ -1,0 +1,61 @@
+[
+  {
+    "test_id": "EVAL-001",
+    "description": "Boston Commercial Facility Scope 1 and Scope 2 Audit",
+    "prompt": "Audit sustainability metrics for facility FAC-BOS-001 in US-NEISO eGRID region with 100,000 kWh electricity and 500 therms natural gas.",
+    "input_data": {
+      "facility_id": "FAC-BOS-001",
+      "facility_name": "Boston Regional Office",
+      "region_code": "US-NEISO",
+      "electricity_kwh": 100000.0,
+      "natural_gas_therms": 500.0,
+      "diesel_gallons": 0.0,
+      "reporting_period": "2025-Q4"
+    },
+    "expected_metrics": {
+      "scope1_co2e_mt": 2.653,
+      "scope2_co2e_mt": 23.0,
+      "total_co2e_mt": 25.653,
+      "is_compliant": true
+    }
+  },
+  {
+    "test_id": "EVAL-002",
+    "description": "High-Emission Texas Data Center Exceeding Compliance Target",
+    "prompt": "Audit facility FAC-TX-999 in US-ERCOT eGRID region with 500,000 kWh electricity and 2,000 gallons diesel.",
+    "input_data": {
+      "facility_id": "FAC-TX-999",
+      "facility_name": "Austin Data Center",
+      "region_code": "US-ERCOT",
+      "electricity_kwh": 500000.0,
+      "natural_gas_therms": 0.0,
+      "diesel_gallons": 2000.0,
+      "reporting_period": "2025-Q4"
+    },
+    "expected_metrics": {
+      "scope1_co2e_mt": 20.42,
+      "scope2_co2e_mt": 190.0,
+      "total_co2e_mt": 210.42,
+      "is_compliant": false
+    }
+  },
+  {
+    "test_id": "EVAL-003",
+    "description": "High-Stakes Solar PPA Approval Gate Trigger",
+    "prompt": "Submit proposal for Solar PPA contract costing $50,000 to offset 200 MT CO2e for FAC-TX-999.",
+    "input_data": {
+      "facility_id": "FAC-TX-999",
+      "facility_name": "Austin Data Center",
+      "region_code": "US-ERCOT",
+      "electricity_kwh": 500000.0
+    },
+    "proposed_action": {
+      "action_type": "SOLAR_PPA_CONTRACT",
+      "estimated_cost_usd": 50000.0,
+      "expected_co2e_reduction_mt": 200.0,
+      "vendor_name": "SunPower Enterprise",
+      "justification": "Mitigate Scope 2 non-compliance."
+    },
+    "expected_approval_status": "PENDING_HUMAN_APPROVAL"
+  }
+]

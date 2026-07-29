@@ -1,0 +1,22 @@
+name: ecostream-sustainability-agent
+display_name: EcoStream Enterprise Sustainability Agent
+version: 1.0.0
+description: Enterprise Scope 1/2/3 carbon footprint audit and GHG compliance agent.
+entrypoint: main.py
+runtime: python3.10
+framework: google-adk
+
+config:
+  fast_model: gemini-2.5-flash
+  pro_model: gemini-2.5-pro
+  max_context_tokens: 4096
+  approval_threshold_usd: 10000.0
+
+deployment:
+  target: cloud_run
+  region: us-central1
+  min_instances: 1
+  max_instances: 10
+  secrets:
+    - name: GEMINI_API_KEY
+      secret_manager_id: ecostream-gemini-api-key
